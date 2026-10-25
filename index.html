@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ArbiterSort AI — Spectral-Vision Waste Contamination & Circular Routing Engine (Arbiter Hacks V1)</title>
+  <style>
+    :root {
+      --bg-0: #06100e;
+      --bg-1: #0b1c18;
+      --bg-2: #112a24;
+      --bg-3: #193b33;
+      --border: #235347;
+      --text-0: #f0fdf4;
+      --text-1: #a7f3d0;
+      --text-2: #6ee7b7;
+      --emerald: #10b981;
+      --lime: #84cc16;
+      --cyan: #06b6d4;
+      --amber: #f59e0b;
+      --danger: #f43f5e;
+      --purple: #a855f7;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: radial-gradient(circle at 20% 0%, #0f2e26 0%, var(--bg-0) 65%);
+      color: var(--text-0);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    header {
+      background: rgba(11, 28, 24, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .brand-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--emerald), var(--lime), var(--cyan));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 18px;
+      color: #04120e;
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.35);
+    }
+    .brand h1 {
+      font-size: 18px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .badge {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .badge-theme { background: rgba(16, 185, 129, 0.18); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.45); }
+    .badge-nir { background: rgba(6, 182, 212, 0.18); color: #22d3ee; border: 1px solid rgba(6, 182, 212, 0.45); }
+    .badge-alert { background: rgba(244, 63, 94, 0.18); color: #fb7185; border: 1px solid rgba(244, 63, 94, 0.45); }
+    .brand p {
+      font-size: 12px;
+      color: var(--text-1);
+      margin-top: 2px;
+    }
+    .btn {
+      background: var(--bg-2);
+      color: var(--text-0);
+      border: 1px solid var(--border);
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.16s ease;
+    }
+    .btn:hover { border-color: var(--emerald); background: var(--bg-3); }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--emerald), var(--lime));
+      color: #04120e;
+      border: none;
+      font-weight: 800;
+    }
+    .btn-danger {
+      background: rgba(244, 63, 94, 0.18);
+      color: #fb7185;
+      border-color: rgba(244, 63, 94, 0.5);
+    }
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 14px;
+      padding: 16px 24px 0;
+    }
+    .kpi-card {
+      background: rgba(17, 42, 36, 0.8);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 16px;
+    }
+    .kpi-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: var(--text-2);
+      font-weight: 700;
+    }
+    .kpi-val {
+      font-size: 23px;
+      font-weight: 800;
+      margin-top: 6px;
+      font-family: var(--font-mono);
+    }
+    .kpi-sub {
+      font-size: 11px;
+      color: var(--text-1);
+      margin-top: 4px;
+    }
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 0.95fr;
+      gap: 16px;
+      padding: 16px 24px 28px;
+    }
+    .panel {
+      background: rgba(11, 28, 24, 0.88);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .panel-header {
+      padding: 12px 16px;
+      background: rgba(17, 42, 36, 0.92);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .panel-header h2 {
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+    }
+    .panel-body {
+      padding: 16px;
+      flex: 1;
+    }
+    canvas {
+      width: 100%;
+      border-radius: 10px;
+      background: #040b09;
+      border: 1px solid var(--border);
+      display: block;
+    }
+    .preset-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .inspector-box {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px;
+      margin-top: 12px;
+      font-size: 12.5px;
+    }
+    .route-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      font-size: 11.8px;
+    }
+    .route-table th, .route-table td {
+      padding: 8px 10px;
+      border-bottom: 1px solid rgba(35, 83, 71, 0.5);
+      text-align: left;
+    }
+    .route-table th {
+      color: var(--text-2);
+      font-size: 10.5px;
+      text-transform: uppercase;
+      font-family: var(--font-mono);
+    }
+    @media (max-width: 1100px) {
+      .main-grid { grid-template-columns: 1fr; }
+      .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="brand-icon">♻️</div>
+      <div>
+        <h1>
+          ArbiterSort AI
+          <span class="badge badge-theme">Arbiter Hacks V1 • Rethinking Waste</span>
+          <span class="badge badge-nir">NIR + Vision Polymer Sorter</span>
+          <span class="badge badge-alert" id="hazard-pill">0 Thermal Hazards</span>
+        </h1>
+        <p>Real-Time Optical/NIR Waste Contamination Classifier, MRF Bale Purity Guard & Circular Waste-to-Resource Router</p>
+      </div>
+    </div>
+    <div style="display:flex; gap:10px;">
+      <button class="btn btn-danger" onclick="spawnItem('li_ion')">🔥 Inject Hidden Li-Ion Battery Hazard</button>
+      <button class="btn" onclick="spawnItem('pvc_contaminant')">🧪 Inject PVC #3 Melt Contaminant</button>
+      <button class="btn btn-primary" onclick="optimizeCircularRoutes()">🚛 Re-Optimize Circular Recovery Routes</button>
+    </div>
+  </header>
+
+  <section class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-label">MRF Bale Purity (PET #1)</div>
+      <div class="kpi-val" id="kpi-purity" style="color: var(--emerald);">99.4%</div>
+      <div class="kpi-sub">Grade-A Food-Contact R-PET Threshold (&gt;98.5%)</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Items Sorted &amp; Diverted</div>
+      <div class="kpi-val" id="kpi-sorted" style="color: var(--lime);">1,428</div>
+      <div class="kpi-sub">Pneumatic 120-PSI Air-Jet Precision: 98.9%</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Contamination Intercepted</div>
+      <div class="kpi-val" id="kpi-contam" style="color: var(--amber);">64 items</div>
+      <div class="kpi-sub">Prevents $4,200/load MRF bale rejection penalties</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Net Circular Value Recovered</div>
+      <div class="kpi-val" id="kpi-value" style="color: var(--cyan);">$18,940</div>
+      <div class="kpi-sub">R-PET, HDPE, Aluminum &amp; Compost Feedstock</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">CO₂e Landfill Emissions Avoided</div>
+      <div class="kpi-val" id="kpi-co2" style="color: var(--purple);">42.6 tCO₂e</div>
+      <div class="kpi-sub">EPA WARM v16 Life-Cycle Accounting</div>
+    </div>
+  </section>
+
+  <main class="main-grid">
+    <!-- Left Column: Real-Time Conveyor & NIR Spectral Analyzer -->
+    <div class="panel">
+      <div class="panel-header">
+        <h2>1. Live Optical + Near-Infrared (900–1700 nm) Conveyor Sorter</h2>
+        <span class="badge badge-nir">60 FPS Hyperspectral Telemetry</span>
+      </div>
+      <div class="panel-body">
+        <canvas id="conveyorCanvas" width="760" height="310"></canvas>
+
+        <div class="preset-strip">
+          <button class="btn" onclick="spawnItem('pet_clear')">🍾 Spawn Clear PET #1 Bottle</button>
+          <button class="btn" onclick="spawnItem('hdpe_jug')">🧴 Spawn HDPE #2 Milk Jug</button>
+          <button class="btn" onclick="spawnItem('alu_can')">🥫 Spawn Aluminum 6061 Can</button>
+          <button class="btn" onclick="spawnItem('greasy_pizza')">🍕 Spawn Greasy Pizza Box (Fiber Contam)</button>
+          <button class="btn" onclick="spawnItem('compost_org')">🥬 Spawn Commercial Food Organics</button>
+          <button class="btn btn-danger" onclick="spawnItem('li_ion')">🔋 Spawn Swollen Li-Ion Pouch Cell</button>
+        </div>
+
+        <div class="inspector-box" id="item-inspector">
+          <!-- Populated dynamically when items are scanned -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column: NIR Spectral Curve + Circular Municipal Routing -->
+    <div class="panel">
+      <div class="panel-header">
+        <h2>2. NIR Absorbance Spectrum &amp; Circular Resource Router</h2>
+        <span class="badge badge-theme">EPA WARM + CVRP Solver</span>
+      </div>
+      <div class="panel-body">
+        <div style="font-size:11.5px; color:var(--text-1); margin-bottom:6px;">
+          Real-Time Near-Infrared (900–1700 nm) Overtones of C–H / O–H / C–Cl Bonds &amp; XRF Thermal Signature:
+        </div>
+        <canvas id="spectrumCanvas" width="540" height="175"></canvas>
+
+        <div style="margin-top:16px; display:flex; justify-content:space-between; align-items:center;">
+          <h3 style="font-size:12.5px; text-transform:uppercase; letter-spacing:0.5px;">
+            🚛 Circular Waste-to-Resource Matchmaking &amp; Fleet Dispatch
+          </h3>
+          <span style="font-size:11px; font-family:var(--font-mono); color:var(--emerald);" id="route-efficiency-label">
+            CVRP Backhaul Utilization: 94.2%
+          </span>
+        </div>
+
+        <table class="route-table" id="route-table">
+          <thead>
+            <tr>
+              <th>Generator / Stream</th>
+              <th>Material &amp; Purity</th>
+              <th>Circular Destination</th>
+              <th>Value / CO₂e Saved</th>
+            </tr>
+          </thead>
+          <tbody id="route-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const MATERIALS = {
+      pet_clear: {
+        name: "Clear PET #1 Beverage Bottle",
+        resin: "PETE #1",
+        chute: "CHUTE A: Food-Grade R-PET Flake",
+        color: "#38bdf8",
+        contaminant: false,
+        hazard: false,
+        valuePerTon: "$540/ton",
+        co2Factor: "-1.84 tCO2e/ton",
+        peaksNm: [1130, 1415, 1660],
+        diagnosis: "Clean polyethylene terephthalate ester C=O & aromatic C-H overtones at 1660 nm. Zero PVC/adhesive contamination -> Diverted to Food-Grade R-PET Chute A."
+      },
+      hdpe_jug: {
+        name: "Natural HDPE #2 Container",
+        resin: "HDPE #2",
+        chute: "CHUTE B: Polyolefin Pelletizer",
+        color: "#10b981",
+        contaminant: false,
+        hazard: false,
+        valuePerTon: "$690/ton",
+        co2Factor: "-1.62 tCO2e/ton",
+        peaksNm: [1210, 1395, 1728],
+        diagnosis: "Strong aliphatic CH2 stretching doublet at 1210 nm & 1728 nm. High-value natural HDPE -> Diverted to Polyolefin Chute B."
+      },
+      alu_can: {
+        name: "Aluminum 6061 Beverage Can",
+        resin: "ALU-6061",
+        chute: "CHUTE C: Eddy-Current Smelter",
+        color: "#a855f7",
+        contaminant: false,
+        hazard: false,
+        valuePerTon: "$1,680/ton",
+        co2Factor: "-8.14 tCO2e/ton",
+        peaksNm: [980, 1310, 1550],
+        diagnosis: "High broadband metallic reflectance + Eddy-Current conductivity spike. Highest embodied energy recovery (-8.14 tCO2e/ton) -> Chute C."
+      },
+      pvc_contaminant: {
+        name: "PVC #3 Blister Pack (Melt Contaminant!)",
+        resin: "PVC #3 [REJECT]",
+        chute: "AIR-JET REJECT: Prevent HCl Acid Degradation",
+        color: "#f59e0b",
+        contaminant: true,
+        hazard: false,
+        valuePerTon: "-$4,200 penalty avoided",
+        co2Factor: "Bale Integrity Protected",
+        peaksNm: [1190, 1435, 1715],
+        diagnosis: "CRITICAL CONTAMINANT: C-Cl bond absorption at 1715 nm detected! Even 50 ppm of PVC turns an entire 20-ton PET #1 extruder batch black and releases HCl gas. Fired 120-PSI Nozzle #4 to eject."
+      },
+      greasy_pizza: {
+        name: "Lipid-Soaked Corrugated Box",
+        resin: "SOILED FIBER",
+        chute: "CHUTE D: Anaerobic Digestion / Compost",
+        color: "#eab308",
+        contaminant: true,
+        hazard: false,
+        valuePerTon: "$68/ton (Biogas + Compost)",
+        co2Factor: "-0.92 tCO2e/ton",
+        peaksNm: [1208, 1490, 1725],
+        diagnosis: "Triglyceride lipid absorption band at 1725 nm overlays cellulose O-H band (1490 nm). Would cause paper mill pulper hydrophobic defects -> Rerouted from Paper Bale to Commercial Compost Chute D."
+      },
+      compost_org: {
+        name: "Pre-Consumer Produce & Organics",
+        resin: "ORGANICS",
+        chute: "CHUTE D: Thermophilic Windrow & AD Biogas",
+        color: "#84cc16",
+        contaminant: false,
+        hazard: false,
+        valuePerTon: "$85/ton (Digestate + CH4)",
+        co2Factor: "-1.15 tCO2e/ton",
+        peaksNm: [970, 1450, 1940],
+        diagnosis: "Strong moisture O-H overtones at 970 nm and 1450 nm with zero synthetic polymer peaks -> Routed to Regional Anaerobic Digester to prevent fugitive landfill methane."
+      },
+      li_ion: {
+        name: "Hidden Lithium-Ion Pouch Battery",
+        resin: "HAZARD: LI-ION",
+        chute: "EMERGENCY BUNKER: Thermal Runaway Suppression",
+        color: "#f43f5e",
+        contaminant: true,
+        hazard: true,
+        valuePerTon: "$250,000 MRF Fire Prevented",
+        co2Factor: "Cobalt/Lithium Hydrometallurgy",
+        peaksNm: [1050, 1340, 1610],
+        diagnosis: "🚨 THERMAL & XRF HAZARD: Cobalt/Graphite casing + 54.8°C localized IR hotspot detected! #1 cause of catastrophic MRF facility fires. Diverted to Vermiculite Fire-Suppression Bunker."
+      }
+    };
+
+    const convCanvas = document.getElementById("conveyorCanvas");
+    const convCtx = convCanvas.getContext("2d");
+    const specCanvas = document.getElementById("spectrumCanvas");
+    const specCtx = specCanvas.getContext("2d");
+
+    let beltItems = [];
+    let sortedCount = 1428;
+    let contamCount = 64;
+    let hazardCount = 0;
+    let activeMaterial = MATERIALS.pet_clear;
+
+    function spawnItem(typeKey) {
+      const mat = MATERIALS[typeKey] || MATERIALS.pet_clear;
+      beltItems.push({
+        typeKey,
+        mat,
+        x: 30,
+        y: 85 + Math.random() * 130,
+        w: 58,
+        h: 42,
+        vx: 2.3 + Math.random() * 0.6,
+        vy: 0,
+        scanned: false
+      });
+    }
+
+    function updateInspectorUI(mat) {
+      activeMaterial = mat;
+      const box = document.getElementById("item-inspector");
+      box.style.borderColor = mat.color;
+      box.innerHTML = `
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+          <strong style="color:${mat.color}; font-size:13.5px;">🔍 Scanned Item: ${mat.name} (${mat.resin})</strong>
+          <span class="badge" style="background:rgba(255,255,255,0.08); color:${mat.color}; border:1px solid ${mat.color};">${mat.chute}</span>
+        </div>
+        <div style="color:var(--text-0); line-height:1.45; margin-bottom:6px;">${mat.diagnosis}</div>
+        <div style="display:flex; gap:18px; font-family:var(--font-mono); font-size:11.5px; color:var(--text-1);">
+          <span>💰 Economic Impact: <strong>${mat.valuePerTon}</strong></span>
+          <span>🌍 Climate Impact: <strong>${mat.co2Factor}</strong></span>
+          <span>📡 NIR Absorption Peaks: <strong>${mat.peaksNm.join(" nm, ")} nm</strong></span>
+        </div>
+      `;
+      drawSpectrum(mat);
+    }
+
+    function drawSpectrum(mat) {
+      const w = specCanvas.width;
+      const h = specCanvas.height;
+      specCtx.clearRect(0, 0, w, h);
+
+      // Grid
+      specCtx.strokeStyle = "rgba(35, 83, 71, 0.45)";
+      specCtx.lineWidth = 1;
+      for (let x = 40; x < w; x += 80) {
+        specCtx.beginPath();
+        specCtx.moveTo(x, 10);
+        specCtx.lineTo(x, h - 24);
+        specCtx.stroke();
+      }
+
+      // Draw spectral curve from 900nm to 1750nm
+      specCtx.beginPath();
+      specCtx.strokeStyle = mat.color;
+      specCtx.lineWidth = 2.6;
+      for (let px = 35; px < w - 15; px++) {
+        const nm = 900 + ((px - 35) / (w - 50)) * 850;
+        let absorb = 0.15 + 0.04 * Math.sin(nm * 0.03);
+        mat.peaksNm.forEach(peak => {
+          const dist = (nm - peak) / 34;
+          absorb += 0.68 * Math.exp(-(dist * dist));
+        });
+        const py = (h - 28) - Math.min(0.92, absorb) * (h - 48);
+        if (px === 35) specCtx.moveTo(px, py);
+        else specCtx.lineTo(px, py);
+      }
+      specCtx.stroke();
+
+      // Peak markers
+      specCtx.fillStyle = "#f0fdf4";
+      specCtx.font = "11px monospace";
+      mat.peaksNm.forEach(peak => {
+        const px = 35 + ((peak - 900) / 850) * (w - 50);
+        specCtx.fillText(`${peak}nm`, px - 20, 22);
+      });
+
+      specCtx.fillStyle = "#6ee7b7";
+      specCtx.fillText("900 nm", 35, h - 7);
+      specCtx.fillText("1325 nm (NIR C-H / O-H Overtones)", w / 2 - 95, h - 7);
+      specCtx.fillText("1750 nm", w - 65, h - 7);
+    }
+
+    function animateConveyor() {
+      const w = convCanvas.width;
+      const h = convCanvas.height;
+      convCtx.clearRect(0, 0, w, h);
+
+      // Conveyor belt tracks
+      convCtx.fillStyle = "#081512";
+      convCtx.fillRect(0, 45, w, h - 90);
+      convCtx.strokeStyle = "#1e463c";
+      convCtx.lineWidth = 2;
+      convCtx.strokeRect(0, 45, w, h - 90);
+
+      // Scanner laser bridge at x = 390
+      const scanX = 390;
+      convCtx.fillStyle = "rgba(6, 182, 212, 0.16)";
+      convCtx.fillRect(scanX - 18, 25, 36, h - 50);
+      convCtx.strokeStyle = "#22d3ee";
+      convCtx.beginPath();
+      convCtx.moveTo(scanX, 25);
+      convCtx.lineTo(scanX, h - 25);
+      convCtx.stroke();
+      convCtx.fillStyle = "#22d3ee";
+      convCtx.font = "bold 11px monospace";
+      convCtx.fillText("NIR + VISION GANTRY", scanX - 62, 18);
+
+      // Chute labels on right
+      convCtx.font = "11px monospace";
+      convCtx.fillStyle = "#38bdf8";
+      convCtx.fillText("➔ CHUTE A/B: PURE POLYMERS", w - 195, 32);
+      convCtx.fillStyle = "#84cc16";
+      convCtx.fillText("➔ CHUTE C/D: ALU & ORGANICS", w - 195, h / 2);
+      convCtx.fillStyle = "#f43f5e";
+      convCtx.fillText("➔ AIR-JET REJECT / HAZARD BUNKER", w - 225, h - 14);
+
+      // Update & draw items
+      for (let i = beltItems.length - 1; i >= 0; i--) {
+        const it = beltItems[i];
+        it.x += it.vx;
+        it.y += it.vy;
+
+        if (!it.scanned && it.x >= scanX - 10) {
+          it.scanned = true;
+          sortedCount += 1;
+          document.getElementById("kpi-sorted").textContent = sortedCount.toLocaleString();
+          if (it.mat.contaminant) {
+            contamCount += 1;
+            document.getElementById("kpi-contam").textContent = `${contamCount} items`;
+            it.vy = 1.45; // Air-jet deflects downward to reject/compost chute
+          } else {
+            it.vy = -0.85; // Deflects upward to pure polymer chute
+          }
+          if (it.mat.hazard) {
+            hazardCount += 1;
+            document.getElementById("hazard-pill").textContent = `${hazardCount} Thermal Hazard Intercepted!`;
+          }
+          updateInspectorUI(it.mat);
+        }
+
+        // Bounding box
+        convCtx.fillStyle = it.mat.color + "33";
+        convCtx.strokeStyle = it.mat.color;
+        convCtx.lineWidth = 2;
+        convCtx.fillRect(it.x, it.y, it.w, it.h);
+        convCtx.strokeRect(it.x, it.y, it.w, it.h);
+
+        convCtx.fillStyle = "#ffffff";
+        convCtx.font = "bold 10px monospace";
+        convCtx.fillText(it.mat.resin, it.x + 4, it.y + 16);
+        convCtx.font = "9.5px sans-serif";
+        convCtx.fillStyle = "#d1fae5";
+        convCtx.fillText(it.scanned ? "CONF 99.4%" : "TRACKING", it.x + 4, it.y + 32);
+
+        if (it.x > w + 30) {
+          beltItems.splice(i, 1);
+        }
+      }
+
+      if (beltItems.length < 4 && Math.random() < 0.045) {
+        const keys = ["pet_clear", "hdpe_jug", "alu_can", "compost_org", "greasy_pizza", "pvc_contaminant"];
+        spawnItem(keys[Math.floor(Math.random() * keys.length)]);
+      }
+
+      requestAnimationFrame(animateConveyor);
+    }
+
+    const CIRCULAR_ROUTES = [
+      {
+        gen: "Metro MRF Line #1 (Optical Chute A)",
+        mat: "Clear R-PET Flake (99.4% Purity)",
+        dest: "LoopPolymer Bottle-to-Bottle Extruder (11.2 km)",
+        impact: "+$6,480 • -22.1 tCO₂e"
+      },
+      {
+        gen: "Campus Dining & Grocery Hub #4",
+        mat: "Pre-Consumer Organics (0.1% Contam)",
+        dest: "EastBay Thermophilic Digester & Biogas (6.8 km)",
+        impact: "+$1,190 • -9.4 tCO₂e"
+      },
+      {
+        gen: "Metro MRF Eddy-Current Chute C",
+        mat: "Aluminum 6061 Compressed Briquettes",
+        dest: "Novelis Secondary Rolling Mill (18.4 km)",
+        impact: "+$9,820 • -11.1 tCO₂e"
+      },
+      {
+        gen: "Hazard Suppression Bunker #1",
+        mat: "Intercepted Li-Ion Cells & E-Waste",
+        dest: "Redwood Hydrometallurgical Recovery (24.0 km)",
+        impact: "$250K Fire Avoided • 95% Co/Li Recovery"
+      }
+    ];
+
+    function renderRoutes() {
+      const tbody = document.getElementById("route-tbody");
+      tbody.innerHTML = CIRCULAR_ROUTES.map(r => `
+        <tr>
+          <td style="font-weight:600; color:var(--text-0);">${r.gen}</td>
+          <td style="color:var(--text-1);">${r.mat}</td>
+          <td style="color:var(--cyan);">${r.dest}</td>
+          <td style="font-family:var(--font-mono); color:var(--emerald); font-weight:700;">${r.impact}</td>
+        </tr>
+      `).join("");
+    }
+
+    function optimizeCircularRoutes() {
+      CIRCULAR_ROUTES.unshift(CIRCULAR_ROUTES.pop());
+      document.getElementById("route-efficiency-label").textContent =
+        `CVRP Backhaul Utilization: ${(94.5 + Math.random() * 3.8).toFixed(1)}%`;
+      renderRoutes();
+    }
+
+    // Boot
+    spawnItem("pet_clear");
+    spawnItem("pvc_contaminant");
+    spawnItem("alu_can");
+    updateInspectorUI(MATERIALS.pet_clear);
+    renderRoutes();
+    requestAnimationFrame(animateConveyor);
+  </script>
+</body>
+</html>
